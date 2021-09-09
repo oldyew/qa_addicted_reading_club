@@ -25,6 +25,21 @@
 
 TODO: Table of content
 
+## Table of contents
+
+[1. Codebase](#1-codebase)
+[2. Dependencies](#2-dependencies)
+[3. Config](#3-config)
+[4. Backing services](#4-backing-services)
+[Build, release, run](#5-build-release-run)
+[6. Processes](#6-processes)
+[7. Port binding](#7-port-binding)
+[8. Concurrency](#8-concurrency)
+[9. Disposability](#9-disposability)
+[10. Dev/prod parity](#10-devprod-parity)
+[11. Logs](#11-logs)
+[12. Admin processes](#12-admin-processes)
+
 ## 1. Codebase
 
 ### One codebase tracked in revision control(repo), many deploys
