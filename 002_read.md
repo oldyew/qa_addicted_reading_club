@@ -1,29 +1,18 @@
 # [The Twelve-Factor App](https://12factor.net/)
 
-## Introduction
+Development process best practices for building software-as-a-service apps (web apps) that:
 
-- Methodology?
-- Declarative formats for setup automation
-  - Що це значе, як саме?
+- Use declarative formats for setup automation
 - Have a clean contract with the underlying operating system
-  - ?
-- Adopted for cloud platforms
-  - Do we still need DevOps?
+- Are suitable for deployment on modern cloud platforms
 - Minimize divergence between development and production, enabling continuous deployment
-  - which differences? hard/soft, data, configuration?
-  - чи дійсно це дає максимальну гнучкисть?
-- can scale up without significant changes to tooling, architecture, or development practices
-  - silver bullet?
+- Can scale up without significant changes to tooling, architecture, or development practices
 
-### Background
+Paying particular attention to:
 
-- It is a triangulation on **ideal** practices
-  - мені вже страшно
-- organic growth
-- the dynamics of collaboration between developers
+- the dynamics of the organic growth of an app over time
+- the dynamics of collaboration between developers working on the app’s codebase
 - and avoiding the cost of software erosion
-
-TODO: Table of content
 
 ## Table of contents
 
@@ -113,7 +102,6 @@ TODO: Table of content
 
 - App processes are stateless and share-nothing.
 - Any data that needs to persist must be stored in a stateful backing service, typically a database.
-  - What is asset compiling?
 
 ## 7. Port binding
 
@@ -127,8 +115,6 @@ TODO: Table of content
 ### Scale out via the process model
 
 - The developer can architect their app to handle diverse workloads by assigning each type of work to a process type. For example, HTTP requests may be handled by a web process, and long-running background tasks handled by a worker process.
-  - неконкретно. что такое unix модель процессов?
-  - что такое демони?
 - This does not exclude individual processes from handling their own internal multiplexing, via threads inside the runtime VM, or the async/evented model found in tools. But an individual VM can only grow so large (vertical scale), so the application must also be able to span multiple processes running on multiple physical machines.
 - The app processes should never daemonize or write PID files. Instead, rely on the operating system’s process manager to manage output streams, respond to crashed processes, and handle user-initiated restarts and shutdowns.
 
@@ -136,10 +122,9 @@ TODO: Table of content
 
 ### Maximize robustness with fast startup and graceful shutdown
 
-- The app’s processes are disposable, meaning they can be started or stopped at a moment’s notice. 
+- The app’s processes are disposable, meaning they can be started or stopped at a moment’s notice.
   - This facilitates fast elastic scaling, rapid deployment of code or config changes, and robustness of production deploys.
-- The app is architected to handle unexpected, non-graceful terminations. Crash-only design takes this concept to its logical conclusion.
-  - What is crash-only design?
+- The app is architected to handle unexpected, non-graceful terminations.
 
 ## 10. Dev/prod parity
 
@@ -155,7 +140,7 @@ TODO: Table of content
 
 ### Treat logs as event streams
 
-- The app never concerns itself with routing or storage of its output stream. It should not attempt to write to or manage logfiles. 
+- The app never concerns itself with routing or storage of its output stream. It should not attempt to write to or manage logfiles.
 - Instead, each running process writes its event stream, unbuffered, to stdout.
 - In staging or production deploys, each process’ stream will be captured by the execution environment,
  collated together with all other streams from the app, and routed to one or more final destinations for viewing and long-term archival.
